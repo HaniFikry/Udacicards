@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { deleteDeckFromStorage } from '../utils/api'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+
 import { connect } from 'react-redux'
 import { deleteDeck } from '../actions'
 export class DeckDetails extends Component {
@@ -9,6 +11,11 @@ export class DeckDetails extends Component {
     deleteDeckFromStorage(deck)
     this.props.dispatch(deleteDeck(deck))
     this.props.navigation.navigate('Decks')
+  }
+
+  takeQuiz = () => {
+    clearLocalNotification().then(setLocalNotification)
+    this.props.navigation.navigate('Quiz', {deck})
   }
   
   render() {
@@ -25,7 +32,7 @@ export class DeckDetails extends Component {
             <Text style={{color: '#7c53c3'}}>Add Card</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button2} onPress={() => this.props.navigation.navigate('Quiz', {deck})}>
+          <TouchableOpacity style={styles.button2} onPress={() => this.takeQuiz()}>
             <Text style={{color: '#fff'}}> Start Quiz</Text>
           </TouchableOpacity>
 
