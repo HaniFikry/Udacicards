@@ -7,10 +7,10 @@ import reducer from './reducers'
 import { setLocalNotification } from './utils/helpers'
 
 class App extends React.Component {
-  componentDidMount = () => {
+  componentDidMount() {
     setLocalNotification()
   };
-  
+
   render() {
     return (
       <Provider store={createStore(reducer)}>

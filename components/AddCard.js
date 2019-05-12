@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { addCardToStorage } from '../utils/api'
 import {addCard} from '../actions'
 import { connect } from 'react-redux'
@@ -25,7 +25,7 @@ class AddCard extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <KeyboardAvoidingView style={{flex: 1}}>
         <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
           <TextInput 
             style={styles.input}
@@ -45,7 +45,7 @@ class AddCard extends Component {
             <Text style={{color: '#fff'}}>Submit</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

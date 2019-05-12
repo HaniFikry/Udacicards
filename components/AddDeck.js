@@ -11,6 +11,9 @@ export class AddDeck extends Component {
   }
 
   addDeck = () => {
+    if(!this.state.input) { 
+      return alert("Add the Deck Name")
+    }
     let deck = {
       title: this.state.input,
       questions: []

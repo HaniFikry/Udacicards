@@ -53,9 +53,17 @@ export class Quiz extends Component {
   render() {
     const { deck } = this.props.navigation.state.params;
     const { questions } = deck;
+
+    if (questions.length === 0) {
+      return (
+        <View style={styles.center}>
+          <Text style={{ fontSize: 30 }}> This Deck has no questions.</Text>
+        </View>
+      );
+    }
     if (this.state.quizEnded) {
       return (
-        <View style={{flex: 1, alignItems: "center", justifyContent: 'center' }}>
+        <View style={styles.center}>
           <Text style={{ fontSize: 30 }}> Score: {this.state.score}</Text>
           <View>
             <TouchableOpacity
@@ -84,26 +92,16 @@ export class Quiz extends Component {
       <View style={styles.container}>
         <View>
           <Text style={{ fontSize: 20, textAlign: "center" }}>
-            {" "}
-            {this.state.currentQuestion + 1} / {questions.length}{" "}
+            {this.state.currentQuestion + 1} / {questions.length}
           </Text>
           <Text style={{ fontSize: 30, textAlign: "center" }}>
-            {" "}
-            {questions[this.state.currentQuestion].question}{" "}
+            {questions[this.state.currentQuestion].question}
           </Text>
           <TouchableOpacity onPress={this.showAnswer}>
-            <Text
-              style={{
-                color: "#b71845",
-                textAlign: "center",
-                fontWeight: "bold",
-                paddingTop: 5
-              }}
-            >
-              {" "}
+            <Text style={styles.showAnswerBtnText}>
               {this.state.showAnswer
                 ? questions[this.state.currentQuestion].answer
-                : "Answer"}{" "}
+                : "Answer"}
             </Text>
           </TouchableOpacity>
         </View>
@@ -112,13 +110,13 @@ export class Quiz extends Component {
             style={[styles.button, { backgroundColor: "green" }]}
             onPress={() => this.answerQuestion("Correct")}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Correct</Text>
+            <Text style={styles.answerBtnText}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: "red" }]}
             onPress={() => this.answerQuestion("InCorrect")}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Incorrect</Text>
+            <Text style={styles.answerBtnText}>Incorrect</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -139,6 +137,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10
+  },
+  center: { 
+    flex: 1, 
+    alignItems: "center", 
+    justifyContent: "center" 
+  },
+  showAnswerBtnText: {
+    color: "#b71845",
+    textAlign: "center",
+    fontWeight: "bold",
+    paddingTop: 5
+  },
+  answerBtnText: {
+    color: "#fff",
+    fontWeight: "bold"
   }
 });
 

@@ -3,16 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import { withNavigation } from 'react-navigation'
 
 const { width } = Dimensions.get('window')
-class DeckCard extends Component {
-  render() {
-    const {questions, title} = this.props.deck;
-    return (
-      <TouchableOpacity style={styles.container} onPress={() => this.props.navigation.navigate('DeckDetails', {deck: this.props.deck})}>
-        <Text style={{fontSize: 30, textAlign: 'center', color: '#fff'}}>{title}</Text>
-        <Text style={{textAlign: 'center', color: '#fff'}}> {questions} Cards</Text>        
-      </TouchableOpacity>
-    );
-  }
+
+const DeckCard = (props) => {
+  const {questions, title} = props.deck;
+  return (
+    <TouchableOpacity style={styles.container} onPress={() => props.navigation.navigate('DeckDetails', {deck: props.deck})}>
+      <Text style={{fontSize: 30, textAlign: 'center', color: '#fff'}}>{title}</Text>
+      <Text style={{textAlign: 'center', color: '#fff'}}> {questions} Cards</Text>        
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -14,6 +14,7 @@ export class DeckDetails extends Component {
   }
 
   takeQuiz = () => {
+    const {deck} = this.props;
     clearLocalNotification().then(setLocalNotification)
     this.props.navigation.navigate('Quiz', {deck})
   }
@@ -22,8 +23,7 @@ export class DeckDetails extends Component {
     const {deck} = this.props;
     return (
       <View style={styles.container}>
-        <Text></Text>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={styles.detailsContainer}>
           <Text style={{fontSize: 35}}>{deck && deck.title}</Text>
           <Text style={{textAlign: 'center'}}>{deck && deck.questions && deck.questions.length} cards</Text>
         </View>
@@ -37,7 +37,7 @@ export class DeckDetails extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => this.deleteDeck(deck.title)}>
-            <Text style={{color: '#7c53c3', textAlign: 'center'}}>Delete Deck</Text>
+            <Text style={styles.deleteBtnText}>Delete Deck</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -71,7 +71,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
     borderRadius: 3,
     marginBottom: 20,
-  }
+  },
+  deleteBtnText: {color: '#7c53c3', textAlign: 'center'},
+  detailsContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'}
 })
 
 function mapStateToProps(state, props) {
